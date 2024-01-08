@@ -1,0 +1,17 @@
+.taskPopup {
+  border-radius: 25px;
+  box-shadow: 0px 0px 4px 0px #8e92bc;
+  padding: 32px;
+}
+.taskPopup .modal-header {
+  border: none;
+}
+.taskPopup .modal-body {
+  padding-inline: 64px;
+}
+.taskPopup textarea {
+  height: 120px;
+}
+.taskPopup .date-input {
+  width: 150px;
+}

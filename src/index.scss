@@ -1,0 +1,91 @@
+@import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap');
+body {
+  margin: 0;
+  background-color: #FAFAFA;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #141522;
+  box-sizing: border-box;
+}
+a{
+  color: #141522;
+  text-decoration: none;
+}
+input, .btn, button{
+  outline: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+.add-btn:hover {
+  border: 1px solid;
+  border-color: #54577a;
+}
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(18, 27, 250, 0.6);
+  border-radius: 6px;
+}
+*::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+//forms elements
+.taskPopup .closeImg {
+  height: 50px;
+  width: 50px;
+}
+.form-task-header {
+  font-size: 22px;
+  font-weight: 600;
+}
+.form-task-header span {
+  color: #54577a;
+
+  font-size: 12px;
+  font-weight: 400;
+}
+.form-control {
+  border: 1px solid rgba(18, 27, 250, 0.6);
+
+  background: #f5f5f7;
+}
+.form-control:focus {
+  box-shadow: none;
+  border: 1px solid rgba(18, 27, 250, 0.6);
+}
+.form-check {
+  font-size: 20px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+}
+.form-check-input {
+  margin-right: 16px;
+  height: 25px;
+  width: 25px;
+}
+.form-check-input:checked {
+  background-color: #546fff;
+  border-color: #546fff;
+  box-shadow: none;
+}
+.add-btn {
+  font-size: 12px;
+  font-weight: 600;
+  padding-inline: 28px;
+  padding-block: 14px;
+  border: 1px solid;
+  border-color: #8e92bc;
+  transition: 300ms;
+}
+.add-btn img {
+  margin-right: 12px;
+}
+@media (max-width: 1280px){
+  .App{
+    flex-direction: column;
+  }
+}

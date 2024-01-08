@@ -1,0 +1,139 @@
+.sidebar {
+  background-color: white;
+}
+.sidebar h4 {
+  font-size: 24px;
+  font-weight: 600;
+}
+.sidebar .input-wrap {
+  width: 480px;
+  border-radius: 10px;
+  border: 1px solid #141522;
+  padding: 14px 28px;
+  color: #54577a;
+}
+.sidebar .add-btn {
+  font-size: 12px;
+  font-weight: 600;
+
+  padding-inline: 28px;
+  padding-block: 14px;
+
+  border: 1px solid;
+  border-color: #8e92bc;
+  transition: 300ms;
+}
+.sidebar .add-btn img {
+  margin-right: 12px;
+}
+
+@media (max-width: 1600px) {
+  .sidebar h4 {
+    font-size: 22px;
+  }
+  .sidebar .input-wrap {
+    width: 480px;
+    padding: 12px 24px;
+  }
+  .sidebar .add-btn {
+    padding: 12px 24px;
+  }
+}
+@media (max-width: 1440px) {
+  .sidebar h4 {
+    font-size: 20px;
+  }
+  .sidebar .input-wrap {
+    width: 450px;
+    padding: 10px 20px;
+  }
+  .sidebar .add-btn {
+    padding: 10px 20px;
+  }
+}
+@media (max-width: 1280px) {
+  .sidebar {
+    top: 80px;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+  }
+  .sidebar h4 {
+    font-size: 24px;
+  }
+  .sidebar .input-wrap {
+    width: 430px;
+    padding: 14px 28px;
+  }
+  .sidebar .add-btn {
+    font-size: 12px;
+  
+    padding-inline: 28px;
+    padding-block: 14px;
+  }
+}
+@media (max-width: 1024px) {
+  .sidebar h4 {
+    font-size: 22px;
+  }
+  .sidebar .input-wrap {
+    width: 420px;
+    padding: 12px 24px;
+    margin-right: 25px !important;
+    margin-left: 25px !important;
+  }
+  .sidebar .add-btn {
+    padding-inline: 24px;
+    padding-block: 12px;
+  }
+  .btn-text{
+    display: none;
+  }
+  .sidebar .add-btn img {
+    margin-right: 0px;
+  }
+}
+@media (max-width: 800px) {
+  .sidebar{
+    top: 62px;
+  }
+  .sidebar h4 {
+    display: none;
+  }
+  .sidebar .input-wrap {
+    width: 70vw;
+    padding: 9px 18px;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+  }
+  .sidebar .add-btn {
+    padding: 9px 18px;
+  }
+  .btn-text{
+    display: none;
+  }
+  .sidebar .add-btn img {
+    margin-right: 0px;
+  }
+}
+@media (max-width: 600px) {
+  .sidebar{
+    top: 52px;
+    padding: 5px 20px !important;
+  }
+  .sidebar .input-wrap {
+    padding: 5px 10px;
+  }
+  .sidebar input{
+    font-size: 12px;
+  }
+  .sidebar .input-wrap img{
+    height: 15px;
+  }
+  .sidebar .add-btn {
+    padding: 7px 14px;
+  }
+  .sidebar .add-btn img {
+    height: 20px;
+  }
+}
