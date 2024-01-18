@@ -5,6 +5,9 @@
 .toggle{
     display: none;
 }
+.toggle img{
+    height: 52px;
+}
 .navbar .container{
     display: flex;
     flex-direction: column;
@@ -19,6 +22,7 @@
 }
 .navbar .nav-links img, .navbar .nav-brand img{
     margin-right: 12px;
+    height: 40px;
 }
 
 @media(max-width: 1600px){
@@ -62,6 +66,9 @@
 @media(max-width: 800px){
     .navbar{
         padding-block: 15px !important;
+    }
+    .toggle img{
+        height: 40px;
     }
 }
 @media(max-width: 600px){

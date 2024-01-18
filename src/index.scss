@@ -17,6 +17,9 @@ input, .btn, button{
   padding: 0;
   margin: 0;
 }
+button img{
+  height: 24px;
+}
 .add-btn:hover {
   border: 1px solid;
   border-color: #54577a;
