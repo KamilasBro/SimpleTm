@@ -18,6 +18,7 @@ const TaskPopup: React.FC=()=> {
       centered
       onHide={handleClose}
       contentClassName="taskPopup"
+      className="task-popup-wrap"
     >
       <Modal.Header className="ms-auto">
         <Button variant="none" onClick={handleClose}>
@@ -38,7 +39,7 @@ const TaskPopup: React.FC=()=> {
           </Form.Group>
           <Form.Group>
             <Form.Label className="form-task-header">Task Status</Form.Label>
-            <div className="d-flex mb-3">
+            <div className="check-wrap d-flex mb-3">
               <div className="d-flex">
                 <Form.Check type="radio" name="taskStatus" label="Pending" />
               </div>

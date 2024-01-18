@@ -15,3 +15,43 @@
 .taskPopup .date-input {
   width: 150px;
 }
+@media (max-width: 1024px) {
+  .task-popup-wrap{
+    padding: 0px !important;
+  }
+  .task-popup-wrap .modal-dialog{
+    --bs-modal-width: 100vw !important;
+    margin: 0px !important;
+  }
+  .taskPopup {
+    border-radius: 0px;
+    padding: 16px;
+    height: 100vh;
+  }
+  @media (max-height: 646px) {
+    .taskPopup {
+      height: 100%;
+    }
+  }
+  .taskPopup .modal-body {
+    padding-inline: 32px;
+  }
+}
+@media (max-width: 600px) {
+  .taskPopup {
+    padding: 8px;
+  }
+  .taskPopup .modal-body {
+    padding-inline: 16px;
+  }
+  @media (max-height: 660px) {
+    .taskPopup {
+      height: 100vh;
+    }
+  }
+  @media (max-height: 598px) {
+    .taskPopup {
+      height: 100%;
+    }
+  }
+}

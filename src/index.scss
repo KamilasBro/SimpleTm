@@ -1,23 +1,25 @@
-@import '~bootstrap/scss/bootstrap';
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap');
+@import "~bootstrap/scss/bootstrap";
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap");
 body {
   margin: 0;
-  background-color: #FAFAFA;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #fafafa;
+  font-family: "Plus Jakarta Sans", sans-serif;
   color: #141522;
   box-sizing: border-box;
 }
-a{
+a {
   color: #141522;
   text-decoration: none;
 }
-input, .btn, button{
+input,
+.btn,
+button {
   outline: none;
   border: none;
   padding: 0;
   margin: 0;
 }
-button img{
+button img {
   height: 24px;
 }
 .add-btn:hover {
@@ -36,9 +38,11 @@ button img{
   background-color: #f1f1f1;
 }
 //forms elements
+.modal-header{
+  padding: 0px !important;
+}
 .taskPopup .closeImg {
   height: 50px;
-  width: 50px;
 }
 .form-task-header {
   font-size: 22px;
@@ -87,8 +91,64 @@ button img{
 .add-btn img {
   margin-right: 12px;
 }
-@media (max-width: 1280px){
-  .App{
+@media (max-width: 1280px) {
+  .App {
     flex-direction: column;
+  }
+}
+@media (max-width: 1024px) {
+  //forms elements
+  .form-task-header {
+    font-size: 20px;
+  }
+  .form-task-header span {
+    font-size: 10px;
+  }
+  .form-check {
+    font-size: 18px;
+  }
+  .form-check-input {
+    margin-right: 14px;
+    height: 25px;
+    width: 25px;
+  }
+  .add-btn {
+    font-size: 10px;
+    padding-inline: 28px;
+    padding-block: 14px;
+  }
+}
+@media (max-width: 600px) {
+  //forms elements
+  .taskPopup .closeImg {
+    height: 40px;
+  }
+  .form-task-header {
+    font-size: 18px;
+  }
+  .form-task-header span {
+    font-size: 8px;
+  }
+  .check-wrap{
+    flex-direction: column;
+  }
+  .check-wrap div{
+    margin: 0px !important;
+  }
+  .form-check {
+    font-size: 16px;
+  }
+  .form-check-input {
+    margin-right: 10px;
+    height: 20px;
+    width: 20px;
+  }
+  .add-btn {
+    font-size: 9px;
+    padding-inline: 24px;
+    padding-block: 12px;
+  }
+  .add-btn img {
+    margin-right: 10px;
   }
 }

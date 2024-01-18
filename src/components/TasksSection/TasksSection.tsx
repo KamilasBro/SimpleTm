@@ -4,11 +4,11 @@ import addImg from "../../images/add.png";
 import closeImg from "../../images/close.png";
 import editImg from "../../images/edit.png";
 import "./tasksSection.scss";
+import example from "../../contextAPI/example.json"
 const TasksSection: React.FC=()=> {
-  const array = new Array(10).fill(1);
   return (
     <section className="tasksSection py-4 px-2 d-flex overflow-auto">
-      {array.map((e, index) => {
+      {example.map((e, index) => {
         return (
           <div className="task-section p-3 m-3" key={index}>
             <div className="d-flex align-items-center justify-content-between">
@@ -27,16 +27,16 @@ const TasksSection: React.FC=()=> {
               </Button>
             </div>
             <div className="tasks">
-              {array.map((e, index) => {
+              {e.tasks.map((e, index) => {
                 return (
-                  <div className="task p-2 m-1" key={index}>
+                  <div className="task p-2 m-1" key={"task"+index}>
                     <div className="d-flex align-items-center justify-content-between">
-                      <div className="task-name">{e}</div>
+                      <div className="task-name">{e.taskName}</div>
                       <Button variant="none">
                         <img src={closeImg} alt="close-section" />
                       </Button>
                     </div>
-                    <div className="task-date mt-3">123</div>
+                    <div className="task-date mt-3">{e.taskDate}</div>
                   </div>
                 );
               })}
