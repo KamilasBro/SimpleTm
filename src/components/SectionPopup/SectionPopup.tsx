@@ -37,18 +37,21 @@ const SectionPopup: React.FC = () => {
                 switch(dataContext.lastAction){
                   case "add":
                     dataContext.dispatch({
-                      type: "SET_DATA",
-                      payload: [
-                        ...dataContext.data,
-                        {
-                          id: uuidv4(),
-                          sectionName: dataContext.lastSection,
-                          tasks: [],
-                        },
-                      ],
+                      type: "ADD_SECTION",
+                      payload: {
+                        sectionId: uuidv4(),
+                        sectionName: dataContext.lastSection,
+                      },
                     });
                     break;
                     case "edit":
+                      dataContext.dispatch({
+                        type: "EDIT_SECTION",
+                        payload: {
+                          sectionId: dataContext.lastId,
+                          sectionName: dataContext.lastSection,
+                        },
+                      });
                     break;
                 }
                 dataContext.dispatch({

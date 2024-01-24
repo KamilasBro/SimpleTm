@@ -61,18 +61,56 @@ const dataReducer: Reducer<DataContextType, DataContextAction> = (
       return { ...state, lastTask: action.payload };
     case "SET_LAST_SECTION_NAME":
       return { ...state, lastSection: action.payload };
-    case "ADD_TASK":
-      const { sectionId, newTask } = action.payload;
-      const updatedData = state.data.map((section) => {
+    case "ADD_SECTION":{
+      const { sectionName, sectionId } = action.payload;
+      const newSection = {
+        id: sectionId,
+        sectionName: sectionName,
+        tasks: [],
+      };
+      return { ...state, data: [...state.data, newSection] };}
+    case "EDIT_SECTION":{
+      const { sectionName, sectionId } = action.payload;
+      const updatedSection = state.data.map((section) => {
         if (section.id === sectionId) {
           return {
             ...section,
-            tasks: [...section.tasks, newTask],
+            sectionName: sectionName,
           };
         }
         return section;
       });
-      return { ...state, data: updatedData };
+      return { ...state, data: updatedSection };}
+    case "ADD_TASK":{
+      const { sectionId, task } = action.payload;
+      const newTask = state.data.map((section) => {
+        if (section.id === sectionId) {
+          return {
+            ...section,
+            tasks: [...section.tasks, task],
+          };
+        }
+        return section;
+      });
+      return { ...state, data: newTask };}
+    case "EDIT_TASK":{
+      const { sectionId, taskId, updatedTask } = action.payload;
+      const updatedDataAfterEdit = state.data.map((section) => {
+        if (section.id === sectionId) {
+          const updatedTasks = section.tasks.map((task) => {
+            if (task.taskId === taskId) {
+              return { ...task, ...updatedTask };
+            }
+            return task;
+          });
+          return {
+            ...section,
+            tasks: updatedTasks,
+          };
+        }
+        return section;
+      });
+      return { ...state, data: updatedDataAfterEdit };}
     // Add more cases for other actions as needed
     default:
       return state;

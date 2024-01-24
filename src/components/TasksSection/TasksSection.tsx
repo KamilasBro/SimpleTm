@@ -33,6 +33,10 @@ const TasksSection: React.FC = () => {
                       payload: "edit",
                     });
                     dataContext.dispatch({
+                      type: "SET_LAST_ID",
+                      payload: e.id,
+                    });
+                    dataContext.dispatch({
                       type: "SET_LAST_SECTION_NAME",
                       payload: e.sectionName,
                     });

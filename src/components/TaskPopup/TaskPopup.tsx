@@ -40,18 +40,29 @@ const TaskPopup: React.FC = () => {
             if (typeof taskName === "string" && taskName.trim() !== "") {
               switch (dataContext.lastAction) {
                 case "add":
-                  const sectionId = dataContext.lastId;
-                  const newTask = {
-                    ...dataContext.lastTask,
-                    taskId: dataContext.lastTaskId,
-                  };
-
                   dataContext.dispatch({
                     type: "ADD_TASK",
-                    payload: { sectionId, newTask },
+                    payload: {
+                      sectionId: dataContext.lastId,
+                      task: {
+                        ...dataContext.lastTask,
+                        taskId: dataContext.lastTaskId,
+                      },
+                    },
                   });
                   break;
                 case "edit":
+                  dataContext.dispatch({
+                    type: "EDIT_TASK",
+                    payload: {
+                      sectionId: dataContext.lastId,
+                      taskId: dataContext.lastTaskId,
+                      updatedTask: {
+                        ...dataContext.lastTask,
+                        taskId: dataContext.lastTaskId,
+                      },
+                    },
+                  });
                   break;
               }
               dataContext.dispatch({
@@ -175,7 +186,6 @@ const TaskPopup: React.FC = () => {
               className="date-input"
               value={dataContext.lastTask.taskDate ?? ""}
               onChange={(event) => {
-                console.log(dataContext.lastTask.taskDate);
                 dataContext.dispatch({
                   type: "SET_LAST_TASK",
                   payload: {

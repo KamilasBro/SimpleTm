@@ -1,3 +1,6 @@
+.tasksSection{
+  min-height: 80%;
+}
 .task-section {
   flex-shrink: 0;
   width: 400px;
@@ -89,6 +92,7 @@
   .tasksSection {
     flex-wrap: wrap;
     margin-top: 180px;
+    margin-inline: 80px;
     justify-content: space-between;
   }
   .task-section {
@@ -103,20 +107,10 @@
   }
   .tasks {
     max-height: 480px;
-  }
-}
-@media(max-width: 1251px){
-  .tasksSection {
-    margin-inline: 80px;
-  }
-  .task-section {
     margin: 10px;
   }
 }
 @media(max-width: 1024px){
-  .tasksSection {
-    justify-content: space-evenly;
-  }
   .task-section {
     width: 280px;
   }

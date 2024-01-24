@@ -3,7 +3,7 @@ import MobileNavbar from "../MobileNavbar/MobileNavbar";
 import "./navbar.scss";
 import Nav from "react-bootstrap/Nav";
 import NavbarComp from "react-bootstrap/Navbar";
-import menuImg from "../../images/navbar/menu.png";
+import hamburgerImg from "../../images/navbar/hamburger.png";
 import taskImg from "../../images/navbar/task.png";
 import bookImg from "../../images/navbar/book.png";
 import gearImg from "../../images/navbar/gear.png";
@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
           dispatch({ type: "TOGGLE" });
         }}
       >
-        <img src={menuImg} alt="menu" />
+        <img src={hamburgerImg} alt="menu" />
       </Nav.Link>
       <MobileNavbar state={state} dispatch={dispatch} />
       <div className="container">
