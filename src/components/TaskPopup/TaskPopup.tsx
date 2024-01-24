@@ -1,18 +1,25 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import closeImg from "../../images/close.png";
 import addImg from "../../images/add.png";
 import "./taskPopup.scss";
-const TaskPopup: React.FC=()=> {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-
+import PopupContext from "../../contextAPI/PopupContext";
+import DataContext from "../../contextAPI/DataContext";
+const TaskPopup: React.FC = () => {
+  // Access the context using useContext
+  const popupContext = useContext(PopupContext);
+  const dataContext = useContext(DataContext);
+  if (!popupContext || !dataContext) {
+    // Handle the case when the context is not available
+    console.error("Context is not available");
+    return null; // or return some fallback content
+  }
+  const handleClose = () => popupContext.setPopupInfo("none");
   return (
     <Modal
-      show={show}
+      show={popupContext.popupInfo === "task" && true}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -29,29 +36,114 @@ const TaskPopup: React.FC=()=> {
         <Form
           onSubmit={(event) => {
             event.preventDefault();
+            const taskName = dataContext.lastTask.taskName;
+            if (typeof taskName === "string" && taskName.trim() !== "") {
+              switch (dataContext.lastAction) {
+                case "add":
+                  const sectionId = dataContext.lastId;
+                  const newTask = {
+                    ...dataContext.lastTask,
+                    taskId: dataContext.lastTaskId,
+                  };
+
+                  dataContext.dispatch({
+                    type: "ADD_TASK",
+                    payload: { sectionId, newTask },
+                  });
+                  break;
+                case "edit":
+                  break;
+              }
+              dataContext.dispatch({
+                type: "SET_LAST_ACTION",
+                payload: "none",
+              });
+              handleClose();
+            }
           }}
         >
           <Form.Group className="mb-3" controlId="formTaskName">
             <Form.Label className="form-task-header">
               Task Name <span>max 20 characters</span>
             </Form.Label>
-            <Form.Control type="text" placeholder="Task Name" maxLength={20}/>
+            <Form.Control
+              value={dataContext.lastTask.taskName ?? ""}
+              onChange={(event) => {
+                dataContext.dispatch({
+                  type: "SET_LAST_TASK",
+                  payload: {
+                    ...dataContext.lastTask,
+                    taskName: event.currentTarget.value,
+                  },
+                });
+              }}
+              required
+              autoComplete="off"
+              type="text"
+              placeholder="Task Name"
+              maxLength={20}
+            />
           </Form.Group>
           <Form.Group>
             <Form.Label className="form-task-header">Task Status</Form.Label>
             <div className="check-wrap d-flex mb-3">
               <div className="d-flex">
-                <Form.Check type="radio" name="taskStatus" label="Pending" />
+                <Form.Check
+                  onChange={() => {
+                    dataContext.dispatch({
+                      type: "SET_LAST_TASK",
+                      payload: {
+                        ...dataContext.lastTask,
+                        taskStatus: "pending",
+                      },
+                    });
+                  }}
+                  checked={
+                    dataContext.lastTask.taskStatus === "pending" && true
+                  }
+                  required
+                  type="radio"
+                  name="taskStatus"
+                  label="Pending"
+                />
               </div>
               <div className="d-flex mx-3">
                 <Form.Check
+                  onChange={() => {
+                    dataContext.dispatch({
+                      type: "SET_LAST_TASK",
+                      payload: {
+                        ...dataContext.lastTask,
+                        taskStatus: "inProgress",
+                      },
+                    });
+                  }}
+                  checked={
+                    dataContext.lastTask.taskStatus === "inProgress" && true
+                  }
+                  required
                   type="radio"
                   name="taskStatus"
                   label="In progress"
                 />
               </div>
               <div className="d-flex mx-3">
-                <Form.Check type="radio" name="taskStatus" label="Done" />
+                <Form.Check
+                  onChange={() => {
+                    dataContext.dispatch({
+                      type: "SET_LAST_TASK",
+                      payload: {
+                        ...dataContext.lastTask,
+                        taskStatus: "done",
+                      },
+                    });
+                  }}
+                  checked={dataContext.lastTask.taskStatus === "done" && true}
+                  required
+                  type="radio"
+                  name="taskStatus"
+                  label="Done"
+                />
               </div>
             </div>
           </Form.Group>
@@ -59,11 +151,41 @@ const TaskPopup: React.FC=()=> {
             <Form.Label className="form-task-header">
               Task Description
             </Form.Label>
-            <Form.Control as="textarea" style={{ resize: "none" }} />
+            <Form.Control
+              as="textarea"
+              style={{ resize: "none" }}
+              value={dataContext.lastTask.taskDesc ?? ""}
+              onChange={(event) => {
+                dataContext.dispatch({
+                  type: "SET_LAST_TASK",
+                  payload: {
+                    ...dataContext.lastTask,
+                    taskDesc: event.currentTarget.value,
+                  },
+                });
+              }}
+            />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formDate">
             <Form.Label className="form-task-header">Task Date</Form.Label>
-            <Form.Control type="date" className="date-input" />
+            <Form.Control
+              required
+              autoComplete="off"
+              type="date"
+              className="date-input"
+              value={dataContext.lastTask.taskDate ?? ""}
+              onChange={(event) => {
+                console.log(dataContext.lastTask.taskDate);
+                dataContext.dispatch({
+                  type: "SET_LAST_TASK",
+                  payload: {
+                    ...dataContext.lastTask,
+                    taskDate: event.currentTarget.value,
+                  },
+                });
+              }}
+              max="9999-12-31"
+            />
           </Form.Group>
           <div className="d-flex justify-content-center">
             <Button
@@ -72,12 +194,12 @@ const TaskPopup: React.FC=()=> {
               className="add-btn d-flex align-items-center"
             >
               <img src={addImg} alt="post-task" />
-              Post Task
+              Post
             </Button>
           </div>
         </Form>
       </Modal.Body>
     </Modal>
-  )
-}
+  );
+};
 export default TaskPopup;

@@ -21,7 +21,15 @@
 .task {
   cursor: pointer;
   border-radius: 15px;
-  border: 1px solid #d9d9d9;
+}
+.task.pending{
+  background: rgba(255, 0, 0, 0.50);
+}
+.task.inProgress{
+  background: rgba(250, 255, 0, 0.50);
+}
+.task.done{
+  background: rgba(51, 255, 0, 0.50);
 }
 .task-name {
   font-size: 14px;

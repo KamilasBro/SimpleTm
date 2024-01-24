@@ -1,20 +1,44 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import addImg from "../../images/add.png";
 import closeImg from "../../images/close.png";
 import editImg from "../../images/edit.png";
 import "./tasksSection.scss";
-import example from "../../contextAPI/example.json"
-const TasksSection: React.FC=()=> {
+import PopupContext from "../../contextAPI/PopupContext";
+import DataContext from "../../contextAPI/DataContext";
+import { v4 as uuidv4 } from "uuid";
+
+const TasksSection: React.FC = () => {
+  const popupContext = useContext(PopupContext);
+  const dataContext = useContext(DataContext);
+  if (!popupContext || !dataContext) {
+    // Handle the case when the context is not available
+    console.error("Context is not available");
+    return null; // or return some fallback content
+  }
+  const baseTaskClassName = "task p-2 m-1 "; // space at the end
   return (
     <section className="tasksSection py-4 px-2 d-flex overflow-auto">
-      {example.map((e, index) => {
+      {dataContext.data.map((e, sectionIindex) => {
         return (
-          <div className="task-section p-3 m-3" key={index}>
+          <div className="task-section p-3 m-3" key={"section" + sectionIindex}>
             <div className="d-flex align-items-center justify-content-between">
               <div className="section-title d-flex align-items-center">
-                To Do
-                <Button variant="none">
+                {e.sectionName}
+                <Button
+                  variant="none"
+                  onClick={() => {
+                    dataContext.dispatch({
+                      type: "SET_LAST_ACTION",
+                      payload: "edit",
+                    });
+                    dataContext.dispatch({
+                      type: "SET_LAST_SECTION_NAME",
+                      payload: e.sectionName,
+                    });
+                    popupContext.setPopupInfo("section");
+                  }}
+                >
                   <img src={editImg} alt="edit-section" className="mx-1" />
                 </Button>
               </div>
@@ -27,16 +51,43 @@ const TasksSection: React.FC=()=> {
               </Button>
             </div>
             <div className="tasks">
-              {e.tasks.map((e, index) => {
+              {e.tasks.map((ele, taskIndex) => {
                 return (
-                  <div className="task p-2 m-1" key={"task"+index}>
+                  <div
+                    className={baseTaskClassName + ele.taskStatus}
+                    key={"task" + taskIndex}
+                    onClick={() => {
+                      dataContext.dispatch({
+                        type: "SET_LAST_ACTION",
+                        payload: "edit",
+                      });
+                      dataContext.dispatch({
+                        type: "SET_LAST_ID",
+                        payload: e.id,
+                      });
+                      dataContext.dispatch({
+                        type: "SET_LAST_TASK_ID",
+                        payload: ele.taskId,
+                      });
+                      dataContext.dispatch({
+                        type: "SET_LAST_TASK",
+                        payload: e.tasks[taskIndex],
+                      });
+                      popupContext.setPopupInfo("task");
+                    }}
+                  >
                     <div className="d-flex align-items-center justify-content-between">
-                      <div className="task-name">{e.taskName}</div>
-                      <Button variant="none">
+                      <div className="task-name">{ele.taskName}</div>
+                      <Button
+                        variant="none"
+                        onClick={(event) => {
+                          event.stopPropagation();
+                        }}
+                      >
                         <img src={closeImg} alt="close-section" />
                       </Button>
                     </div>
-                    <div className="task-date mt-3">{e.taskDate}</div>
+                    <div className="task-date mt-3">{ele.taskDate}</div>
                   </div>
                 );
               })}
@@ -45,7 +96,25 @@ const TasksSection: React.FC=()=> {
               <Button
                 variant="none"
                 className="add-btn d-flex align-items-center"
-                onClick={() => {}}
+                onClick={() => {
+                  dataContext.dispatch({
+                    type: "SET_LAST_ACTION",
+                    payload: "add",
+                  });
+                  dataContext.dispatch({
+                    type: "SET_LAST_TASK",
+                    payload: "",
+                  });
+                  dataContext.dispatch({
+                    type: "SET_LAST_ID",
+                    payload: e.id,
+                  });
+                  dataContext.dispatch({
+                    type: "SET_LAST_TASK_ID",
+                    payload: uuidv4(),
+                  });
+                  popupContext.setPopupInfo("task");
+                }}
               >
                 <img src={addImg} alt="add-section" />
                 Add Task
@@ -55,6 +124,6 @@ const TasksSection: React.FC=()=> {
         );
       })}
     </section>
-  )
-}
+  );
+};
 export default TasksSection;

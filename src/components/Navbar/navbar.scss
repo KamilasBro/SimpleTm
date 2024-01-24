@@ -20,9 +20,13 @@
     font-size: 14px;
     font-weight: 600;
 }
-.navbar .nav-links img, .navbar .nav-brand img{
+.navbar .nav-brand img{
     margin-right: 12px;
     height: 40px;
+}
+.navbar .nav-links img{
+    margin-right: 12px;
+    height: 30px;
 }
 
 @media(max-width: 1600px){

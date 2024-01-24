@@ -1,19 +1,29 @@
-import { useState } from "react";
+import { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import closeImg from "../../images/close.png";
 import addImg from "../../images/add.png";
 import "./sectionPopup.scss";
+import PopupContext from "../../contextAPI/PopupContext";
+import DataContext from "../../contextAPI/DataContext";
+import { v4 as uuidv4 } from 'uuid';
+
 const SectionPopup: React.FC = () => {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-
+  const popupContext = useContext(PopupContext);
+  const dataContext = useContext(DataContext);
+  if (!popupContext || !dataContext) {
+    // Handle the case when the context is not available
+    console.error("Context is not available");
+    return null; // or return some fallback content
+  }
+  const handleClose = () => {
+    popupContext.setPopupInfo("none");
+  };
   return (
     <>
       <Modal
-        show={show}
+        show={popupContext.popupInfo === "section" && true}
         aria-labelledby="contained-modal-title"
         onHide={handleClose}
         contentClassName="sectionPopup"
@@ -23,6 +33,30 @@ const SectionPopup: React.FC = () => {
             className="w-100"
             onSubmit={(event) => {
               event.preventDefault();
+              if(dataContext.lastSection.trim()!==""){
+                switch(dataContext.lastAction){
+                  case "add":
+                    dataContext.dispatch({
+                      type: "SET_DATA",
+                      payload: [
+                        ...dataContext.data,
+                        {
+                          id: uuidv4(),
+                          sectionName: dataContext.lastSection,
+                          tasks: [],
+                        },
+                      ],
+                    });
+                    break;
+                    case "edit":
+                    break;
+                }
+                dataContext.dispatch({
+                  type: "SET_LAST_ACTION",
+                  payload: "none",
+                });
+                handleClose();
+              }
             }}
           >
             <Form.Group className="mb-3" controlId="formTaskName">
@@ -35,8 +69,17 @@ const SectionPopup: React.FC = () => {
                 </Button>
               </Form.Label>
               <Form.Control
+                required
+                autoComplete="off"
                 type="text"
                 placeholder="Section Name"
+                value={dataContext.lastSection}
+                onChange={(event) => {
+                  dataContext.dispatch({
+                    type: "SET_LAST_SECTION_NAME",
+                    payload: event.currentTarget.value
+                  });
+                }}
                 maxLength={15}
               />
             </Form.Group>
@@ -47,7 +90,7 @@ const SectionPopup: React.FC = () => {
                 className="add-btn d-flex align-items-center"
               >
                 <img src={addImg} alt="post-task" />
-                Post Task
+                Post
               </Button>
             </div>
           </Form>
