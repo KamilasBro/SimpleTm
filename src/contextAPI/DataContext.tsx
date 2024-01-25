@@ -7,7 +7,6 @@ import React, {
   useEffect,
   useState
 } from "react";
-import example from "../contextAPI/example.json";
 interface Task {
   [key: string]: string;
 }
@@ -177,8 +176,9 @@ export function DataContextProvider({
   useEffect(() => {
     if (!loading) {
       localStorage.setItem('data', JSON.stringify(state.data));
+      console.log("running")
     }
-  }, [state.data]);
+  }, [state.data, loading]);
 
 
 
