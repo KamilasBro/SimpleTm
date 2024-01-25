@@ -1,26 +1,15 @@
-import React, {
-  createContext,
-  useState,
-  ReactNode,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import React, { createContext, useState } from "react";
 
-// Define the types for the context
-interface PopupContextType {
-  popupInfo: string;
-  setPopupInfo: Dispatch<SetStateAction<string>>;
-}
+import {
+  PopupContextType,
+  PopupContextProviderProps,
+} from "../interfaces/PopupContextInterfaces";
 
-// Initialize the context with an initial value (you can replace "siema" with the actual initial value type)
 const PopupContext = createContext<PopupContextType | undefined>(undefined);
 
-// Define the type for the props
-interface PopupContextProviderProps {
-  children: ReactNode;
-}
-
-export function PopupContextProvider({children}: PopupContextProviderProps): JSX.Element {
+export function PopupContextProvider({
+  children,
+}: PopupContextProviderProps): JSX.Element {
   const [popupInfo, setPopupInfo] = useState<string>("none");
 
   const value: PopupContextType = {

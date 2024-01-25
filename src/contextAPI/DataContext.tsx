@@ -1,35 +1,11 @@
 import React, {
   createContext,
   useReducer,
-  ReactNode,
-  Dispatch,
   Reducer,
   useEffect,
   useState
 } from "react";
-interface Task {
-  [key: string]: string;
-}
-interface DataContextType<T = Task> {
-  data: Array<{
-    id: string;
-    sectionName: string;
-    tasks: Array<T>;
-  }>;
-  searchedPhrase: string;
-  lastAction: string;
-  lastId: string;
-  lastTaskId: string;
-  lastTask: T;
-  lastSection: string;
-  dispatch: Dispatch<DataContextAction>;
-}
-
-interface DataContextAction {
-  type: string;
-  payload?: any;
-}
-
+import { DataContextType, DataContextAction, DataContextProviderProps } from '../interfaces/DataContextInterfaces';
 // Define your initial state
 const initialState: DataContextType = {
   data: [],
@@ -147,9 +123,7 @@ const dataReducer: Reducer<DataContextType, DataContextAction> = (
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
 // Define the type for the props
-interface DataContextProviderProps {
-  children: ReactNode;
-}
+
 
 export function DataContextProvider({
   children,
@@ -176,7 +150,6 @@ export function DataContextProvider({
   useEffect(() => {
     if (!loading) {
       localStorage.setItem('data', JSON.stringify(state.data));
-      console.log("running")
     }
   }, [state.data, loading]);
 

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import addImg from "../../images/add.png";
 import closeImg from "../../images/close.png";
@@ -11,14 +11,50 @@ import { v4 as uuidv4 } from "uuid";
 const TasksSection: React.FC = () => {
   const popupContext = useContext(PopupContext);
   const dataContext = useContext(DataContext);
+  const [isDraggable, setIsDraggable] = useState(false);
+  const [startX, setStartX] = useState<number | null>(null);
   if (!popupContext || !dataContext) {
     // Handle the case when the context is not available
     console.error("Context is not available");
     return null; // or return some fallback content
   }
   const baseTaskClassName = "task p-2 m-1 "; // space at the end
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDraggable(true);
+    setStartX(e.clientX);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDraggable || startX === null) return;
+    const delta = startX - e.clientX;
+    if (delta !== 0) {
+      console.log("mouse moving");
+      console.log(delta);
+      // Adjust the scrollLeft based on the mouse movement
+      const tasksSection = document.getElementById("tasksSection");
+      if (tasksSection) {
+        tasksSection.scrollLeft += delta;
+      }
+    }
+
+    setStartX(e.clientX);
+  };
+
+  const handleMouseUp = () => {
+    if (isDraggable) {
+      setIsDraggable(false);
+      setStartX(null);
+    }
+  };
   return (
-    <section className="tasksSection py-4 px-2 d-flex overflow-auto">
+    <section
+      className="tasksSection py-4 px-2 d-flex overflow-auto"
+      id="tasksSection"
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+    >
       {dataContext.data
         .filter((e) =>
           e.sectionName
