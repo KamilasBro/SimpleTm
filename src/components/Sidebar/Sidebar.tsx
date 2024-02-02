@@ -12,7 +12,7 @@ const Sidebar: React.FC = () => {
   if (!popupContext || !dataContext) {
     // Handle the case when the context is not available
     console.error("Context is not available");
-    return null; // or return some fallback content
+    return null;
   }
   return (
     <section className="sidebar d-flex align-items-center justify-content-between py-3 px-5">
@@ -33,7 +33,7 @@ const Sidebar: React.FC = () => {
               }
             }}
             onKeyPress={(event) => {
-              if (event.key === 'Enter') {
+              if (event.key === "Enter") {
                 dataContext.dispatch({
                   type: "SET_SEARCHED_PHRASE",
                   payload: searchedPhrase.trim(),

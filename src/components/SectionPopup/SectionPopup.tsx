@@ -7,7 +7,7 @@ import addImg from "../../images/add.png";
 import "./sectionPopup.scss";
 import PopupContext from "../../contextAPI/PopupContext";
 import DataContext from "../../contextAPI/DataContext";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const SectionPopup: React.FC = () => {
   const popupContext = useContext(PopupContext);
@@ -15,7 +15,7 @@ const SectionPopup: React.FC = () => {
   if (!popupContext || !dataContext) {
     // Handle the case when the context is not available
     console.error("Context is not available");
-    return null; // or return some fallback content
+    return null;
   }
   const handleClose = () => {
     popupContext.setPopupInfo("none");
@@ -33,8 +33,8 @@ const SectionPopup: React.FC = () => {
             className="w-100"
             onSubmit={(event) => {
               event.preventDefault();
-              if(dataContext.lastSection.trim()!==""){
-                switch(dataContext.lastAction){
+              if (dataContext.lastSection.trim() !== "") {
+                switch (dataContext.lastAction) {
                   case "add":
                     dataContext.dispatch({
                       type: "ADD_SECTION",
@@ -44,14 +44,14 @@ const SectionPopup: React.FC = () => {
                       },
                     });
                     break;
-                    case "edit":
-                      dataContext.dispatch({
-                        type: "EDIT_SECTION",
-                        payload: {
-                          sectionId: dataContext.lastId,
-                          sectionName: dataContext.lastSection,
-                        },
-                      });
+                  case "edit":
+                    dataContext.dispatch({
+                      type: "EDIT_SECTION",
+                      payload: {
+                        sectionId: dataContext.lastId,
+                        sectionName: dataContext.lastSection,
+                      },
+                    });
                     break;
                 }
                 dataContext.dispatch({
@@ -80,7 +80,7 @@ const SectionPopup: React.FC = () => {
                 onChange={(event) => {
                   dataContext.dispatch({
                     type: "SET_LAST_SECTION_NAME",
-                    payload: event.currentTarget.value
+                    payload: event.currentTarget.value,
                   });
                 }}
                 maxLength={15}

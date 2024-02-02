@@ -14,7 +14,7 @@ const TaskPopup: React.FC = () => {
   if (!popupContext || !dataContext) {
     // Handle the case when the context is not available
     console.error("Context is not available");
-    return null; // or return some fallback content
+    return null;
   }
   const handleClose = () => popupContext.setPopupInfo("none");
   return (

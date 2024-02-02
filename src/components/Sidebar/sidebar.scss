@@ -1,3 +1,4 @@
+@import "../../scssPartials/colors";
 .sidebar {
   background-color: white;
 }
@@ -8,9 +9,9 @@
 .sidebar .input-wrap {
   width: 480px;
   border-radius: 10px;
-  border: 1px solid #141522;
+  border: 1px solid $textColor;
   padding: 14px 28px;
-  color: #54577a;
+  color: $gray2;
 }
 .sidebar .add-btn {
   font-size: 12px;
@@ -20,7 +21,7 @@
   padding-block: 14px;
 
   border: 1px solid;
-  border-color: #8e92bc;
+  border-color: $gray1;
   transition: 300ms;
 }
 .sidebar .add-btn img {
@@ -67,7 +68,7 @@
   }
   .sidebar .add-btn {
     font-size: 12px;
-  
+
     padding-inline: 28px;
     padding-block: 14px;
   }
@@ -86,7 +87,7 @@
     padding-inline: 24px;
     padding-block: 12px;
   }
-  .btn-text{
+  .btn-text {
     display: none;
   }
   .sidebar .add-btn img {
@@ -94,7 +95,7 @@
   }
 }
 @media (max-width: 800px) {
-  .sidebar{
+  .sidebar {
     top: 62px;
   }
   .sidebar h4 {
@@ -109,7 +110,7 @@
   .sidebar .add-btn {
     padding: 9px 18px;
   }
-  .btn-text{
+  .btn-text {
     display: none;
   }
   .sidebar .add-btn img {
@@ -117,17 +118,17 @@
   }
 }
 @media (max-width: 600px) {
-  .sidebar{
+  .sidebar {
     top: 52px;
     padding: 5px 20px !important;
   }
   .sidebar .input-wrap {
     padding: 5px 10px;
   }
-  .sidebar input{
+  .sidebar input {
     font-size: 12px;
   }
-  .sidebar .input-wrap img{
+  .sidebar .input-wrap img {
     height: 15px;
   }
   .sidebar .add-btn {

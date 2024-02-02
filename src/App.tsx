@@ -6,6 +6,8 @@ import SectionPopup from "./components/SectionPopup/SectionPopup";
 import TaskPopup from "./components/TaskPopup/TaskPopup";
 import { PopupContextProvider } from "./contextAPI/PopupContext";
 import { DataContextProvider } from "./contextAPI/DataContext";
+//I found nothing really needs an explanation in comments
+//ecerything looks really clear
 const App: React.FC = () => {
   return (
     <div className="App d-flex">

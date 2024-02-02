@@ -1,12 +1,9 @@
+@import "../../scssPartials/colors";
 .sectionPopup {
   border-radius: 25px;
-  box-shadow: 0px 0px 4px 0px #8e92bc;
+  box-shadow: 0px 0px 4px 0px $gray1;
 }
 .sectionPopup .closeImg {
   height: 40px;
   width: 40px;
-}
-@media (max-width: 1024px){
-
-  
 }

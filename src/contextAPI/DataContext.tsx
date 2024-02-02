@@ -3,10 +3,14 @@ import React, {
   useReducer,
   Reducer,
   useEffect,
-  useState
+  useState,
 } from "react";
-import { DataContextType, DataContextAction, DataContextProviderProps } from '../interfaces/DataContextInterfaces';
-// Define your initial state
+import {
+  DataContextType,
+  DataContextAction,
+  DataContextProviderProps,
+} from "../interfaces/DataContextInterfaces";
+
 const initialState: DataContextType = {
   data: [],
   searchedPhrase: "",
@@ -18,7 +22,6 @@ const initialState: DataContextType = {
   dispatch: () => {}, // Placeholder dispatch function
 };
 
-// Define your reducer function
 const dataReducer: Reducer<DataContextType, DataContextAction> = (
   state,
   action
@@ -103,7 +106,9 @@ const dataReducer: Reducer<DataContextType, DataContextAction> = (
       const { sectionId, taskId } = action.payload;
       const updatedDataAfterDeleteTask = state.data.map((section) => {
         if (section.id === sectionId) {
-          const updatedTasks = section.tasks.filter((task) => task.taskId !== taskId);
+          const updatedTasks = section.tasks.filter(
+            (task) => task.taskId !== taskId
+          );
           return {
             ...section,
             tasks: updatedTasks,
@@ -113,47 +118,40 @@ const dataReducer: Reducer<DataContextType, DataContextAction> = (
       });
       return { ...state, data: updatedDataAfterDeleteTask };
     }
-    // Add more cases for other actions as needed
     default:
       return state;
   }
 };
 
-// Initialize the context with an initial value
 const DataContext = createContext<DataContextType | undefined>(undefined);
-
-// Define the type for the props
 
 
 export function DataContextProvider({
   children,
 }: DataContextProviderProps): JSX.Element {
-  // useEffect for loading data from local storage on component mount
+  //saving the data
   useEffect(() => {
     const loadData = async () => {
-      const storedDataString = localStorage.getItem('data');
+      const storedDataString = localStorage.getItem("data");
       if (storedDataString !== null) {
         const storedData = JSON.parse(storedDataString);
         if (storedData) {
-          dispatch({ type: 'SET_DATA', payload: storedData });
+          dispatch({ type: "SET_DATA", payload: storedData });
         }
       }
       setLoading(false);
     };
-    // Invoke loadData function
     loadData();
-  }, []); // Run only on component mount
+  }, []);
   const [loading, setLoading] = useState(true);
   const [state, dispatch] = useReducer(dataReducer, initialState);
 
-  // useEffect for saving data to local storage whenever the 'data' property changes
   useEffect(() => {
+    //loading the data
     if (!loading) {
-      localStorage.setItem('data', JSON.stringify(state.data));
+      localStorage.setItem("data", JSON.stringify(state.data));
     }
   }, [state.data, loading]);
-
-
 
   const value: DataContextType = {
     data: state.data,

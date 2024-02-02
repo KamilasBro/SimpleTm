@@ -1,43 +1,45 @@
-.mobileNavbar{
-    background-color: white;
-    border: none;
-    filter: drop-shadow(0px 0px 4px rgba(18, 27, 250, 0.6));
+@import "../../scssPartials/colors";
+.mobileNavbar {
+  background-color: white;
+  border: none;
+  filter: drop-shadow(0px 0px 4px rgba(18, 27, 250, 0.6));
 }
-.mobileNavbar .container{
-    display: flex;
-    flex-direction: column;
+.mobileNavbar .container {
+  display: flex;
+  flex-direction: column;
 }
-.mobileNavbar .nav-brand{
-    font-size: 24px;
-    font-weight: 600;
+.mobileNavbar .nav-brand {
+  font-size: 24px;
+  font-weight: 600;
 }
-.mobileNavbar .nav-brand img{
-    height: 40px;
+.mobileNavbar .nav-brand img {
+  height: 40px;
 }
-.mobileNavbar .closeImg{
-    height: 40px;
+.mobileNavbar .closeImg {
+  height: 40px;
 }
-.mobileNavbar .nav-links{
-    font-size: 18px;
-    font-weight: 600;
+.mobileNavbar .nav-links {
+  font-size: 18px;
+  font-weight: 600;
 }
-.mobileNavbar .nav-links img{
-    height: 30px;
+.mobileNavbar .nav-links img {
+  height: 30px;
 }
-.mobileNavbar .nav-links img, .mobileNavbar .nav-brand img{
-    margin-right: 12px;
+.mobileNavbar .nav-links img,
+.mobileNavbar .nav-brand img {
+  margin-right: 12px;
 }
-@media (max-width: 800px){
-    .mobileNavbar{
-        width: 100% !important;
-    }
-    .mobileNavbar .closeImg{
-        height: 50px;
-    }
-    .mobileNavbar .nav-brand{
-        font-size: 20px;
-    }
-    .mobileNavbar .nav-links{
-        font-size: 14px;
-    }
+@media (max-width: 800px) {
+  .mobileNavbar {
+    width: 100% !important;
+  }
+  .mobileNavbar .closeImg {
+    height: 50px;
+  }
+  .mobileNavbar .nav-brand {
+    font-size: 20px;
+  }
+  .mobileNavbar .nav-links {
+    font-size: 14px;
+  }
 }

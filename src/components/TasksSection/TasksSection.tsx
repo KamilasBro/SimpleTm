@@ -16,7 +16,7 @@ const TasksSection: React.FC = () => {
   if (!popupContext || !dataContext) {
     // Handle the case when the context is not available
     console.error("Context is not available");
-    return null; // or return some fallback content
+    return null;
   }
   const baseTaskClassName = "task p-2 m-1 "; // space at the end
 
@@ -31,7 +31,6 @@ const TasksSection: React.FC = () => {
     if (delta !== 0) {
       console.log("mouse moving");
       console.log(delta);
-      // Adjust the scrollLeft based on the mouse movement
       const tasksSection = document.getElementById("tasksSection");
       if (tasksSection) {
         tasksSection.scrollLeft += delta;

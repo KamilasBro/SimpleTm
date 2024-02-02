@@ -27,4 +27,4 @@ export interface DataContextAction {
 }
 export interface DataContextProviderProps {
     children: ReactNode;
-  }
+}
